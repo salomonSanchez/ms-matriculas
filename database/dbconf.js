@@ -11,8 +11,8 @@ mongoose.connect(uri, {
 
 const PagoModel = mongoose.model("matriculas", {
     cod_curso: String,
-    cod_estudiante: String
-
+    cod_estudiante: String,
+    timestamp: { type: Date, default: Date.now }
 });
 
 module.exports = {

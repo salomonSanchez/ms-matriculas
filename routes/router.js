@@ -31,7 +31,7 @@ router.get('/pagos/consultar/pago/:curso_id', async(request, response) => {
 router.post("/matricula/registrar", async(request, response) => {
     try {
         var pago = new modelos.PagoModel(request.body);
-        var valido = validarPagos(pago.codigo_estudiante, pago)
+        var valido = validarPagos(pago.cod_estudiante, pago)
         valido.then(resul => {
             if (resul == true) {
                 pago.save();

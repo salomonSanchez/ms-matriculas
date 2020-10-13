@@ -11,7 +11,7 @@ mongoose.connect(uri, {
 
 const PagoModel = mongoose.model("matriculas", {
     cod_curso: String,
-    codigo_estudiante: String
+    cod_estudiante: String
 
 });
 

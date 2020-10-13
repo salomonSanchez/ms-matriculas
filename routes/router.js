@@ -31,15 +31,17 @@ router.get('/pagos/consultar/pago/:curso_id', async(request, response) => {
 router.post("/matricula/registrar", async(request, response) => {
     try {
         var pago = new modelos.PagoModel(request.body);
-        var valido = validarPagos(pago.cod_estudiante, pago)
-        valido.then(resul => {
-            if (resul == true) {
-                pago.save();
-                response.json(pago)
-            } else {
-                response.json("estidiante || curso ,no validos")
-            }
-        })
+        //  var valido = validarPagos(pago.cod_estudiante, pago)
+        //     valido.then(resul => {
+        //        if (resul == true) {
+        //            pago.save();
+        //             response.json(pago)
+        //         } else {
+        //             response.json("estidiante || curso ,no validos")
+        //        }
+        //    })
+        var result = await pago.save();
+        response.json(result)
     } catch (error) {
         response.status(500).send(error);
     }
@@ -51,7 +53,7 @@ function validarPagos(codigo_estudiante, pago) {
         method: 'GET',
         redirect: 'follow'
     };
-    const estado = fetch(`http://localhost:3000/api/v1/pagos/validarpago/${codigo_estudiante}`, requestOptions, pago)
+    const estado = fetch(`https://mics-pagos.herokuapp.com/api/v1/pagos/validarpago/${codigo_estudiante}`, requestOptions, pago)
         .then(response => response.json())
         .catch(error => console.log('error', error))
     return estado
